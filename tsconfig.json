@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es2015"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "outDir": "dist"
+  },
+  "files": [
+    "src/index.ts"
+  ]
+}
