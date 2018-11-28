@@ -8,9 +8,10 @@ import {
   CallExpression,
   FunctionExpression,
   VariableDeclarator,
-  Identifier,
   isIdentifier,
+  ReturnStatement,
 } from 'babel-types'
+import generate from 'babel-generator'
 
 import createDebug = require('debug')
 const debug = createDebug('iife-pop')
@@ -41,7 +42,7 @@ export function IIFE(path: NodePath<IIFENode>) {
       }
 
       throw new Error(`Not sure what to do with a ${childPath.node.id.type} id`)
-    }
+    },
   })
 
   path.replaceWithMultiple(path.node.callee.body.body)

@@ -10,7 +10,6 @@
     "test": "ava"
   },
   "ava": {
-    "timeout": 100,
     "files": [
       "tests/**/test-*.js"
     ],
