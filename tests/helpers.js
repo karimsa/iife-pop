@@ -24,13 +24,13 @@ function hasIIFE(code) {
   return bHasIIFE
 }
 
-exports.transform  = function transform(t, code) {
+exports.transform  = function transform(t, code, opts) {
   const afterCode = babel.transform(code, {
     babelrc: false,
-    plugins: [require('../')],
+    plugins: [[require('../'), opts]],
   }).code
 
-  t.is(hasIIFE(code), true, 'should have at least one IIFE before transformation')
+  // t.is(hasIIFE(code), true, 'should have at least one IIFE before transformation')
   eval(`(function(){${code}}());`)
 
   t.log(afterCode)
