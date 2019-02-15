@@ -4,6 +4,7 @@
  */
 
 import { Visitor } from '@babel/core'
+import template from '@babel/template'
 import {
   NodePath,
 } from '@babel/traverse'
@@ -17,11 +18,49 @@ import {
   Identifier,
 } from '@babel/types'
 
-Error.stackTraceLimit = 1000
+const createIIFE = template(`
+  (function(PARAMS){
+    BODY
+  }(ARGS))
+`)
 
 export default function (): { visitor: Visitor } {
   return {
     visitor: {
+      FunctionDeclaration(path, state) {
+        if (!state || !state.opts || !state.opts.replace_fns) {
+          return
+        }
+
+        const replace_fns: string[] = state.opts.replace_fns
+        if (!Array.isArray(replace_fns)) {
+          throw new Error(`'replace_fns' should be a valid string array`)
+        }
+
+        const fnName = path.node.id
+
+        if (!fnName || replace_fns.indexOf(fnName.name) === -1) {
+          return
+        }
+
+        path.parentPath.traverse({
+          CallExpression(childPath) {
+            if (childPath.node.callee.type !== 'Identifier' || childPath.node.callee.name !== fnName.name) {
+              return
+            }
+
+            childPath.replaceWith(
+              // @ts-ignore
+              createIIFE({
+                PARAMS: path.node.params,
+                ARGS: childPath.node.arguments,
+                BODY: path.node.body,
+              })
+            )
+          },
+        })
+      },
+
       FunctionExpression(path) {
         if (path.parent.type !== 'CallExpression' || !path.parentPath.parent || path.parent.callee.type !== 'FunctionExpression') {
           return
