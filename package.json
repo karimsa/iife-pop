@@ -1,6 +1,6 @@
 {
   "name": "iife-pop",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Remove IIFEs at compile-time.",
   "main": "dist/index.js",
   "scripts": {
