@@ -23,7 +23,7 @@ export default function (): { visitor: Visitor } {
   return {
     visitor: {
       FunctionExpression(path) {
-        if (path.parent.type !== 'CallExpression' || !path.parentPath.parent) {
+        if (path.parent.type !== 'CallExpression' || !path.parentPath.parent || path.parent.callee.type !== 'FunctionExpression') {
           return
         }
 

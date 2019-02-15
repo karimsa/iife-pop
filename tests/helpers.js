@@ -13,7 +13,7 @@ function hasIIFE(code) {
     plugins: [() => ({
       visitor: {
         FunctionExpression(path) {
-          if (path.parent.type === 'CallExpression') {
+          if (path.parent.type === 'CallExpression' && path.parentPath.parent && path.parent.callee.type === 'FunctionExpression') {
             bHasIIFE = true
           }
         },
