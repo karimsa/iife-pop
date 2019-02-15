@@ -1,10 +1,12 @@
 <h1 align="center">iife-pop</h1>
 
-<p align="center">
-  <a href='https://semaphoreci.com/karimsaprojects/iife-pop'> <img src='https://semaphoreci.com/api/v1/projects/ab0094e9-cd40-44eb-9d47-624e5eddf269/2516511/badge.svg' alt='Build Status'></a>
-</p>
+<p align="center">Remove IIFE-s at compile-time.</p>
 
-Remove IIFE-s at compile-time.
+<p align="center">
+  <a href='https://semaphoreci.com/karimsaprojects/iife-pop'>
+    <img src='https://semaphoreci.com/api/v1/projects/ab0094e9-cd40-44eb-9d47-624e5eddf269/2516511/badge.svg' alt='Build Status'>
+  </a>
+</p>
 
 ## Motivation
 
